@@ -1,0 +1,35 @@
+2013-05-08 - Version 3.1
+* Fixed shortcodes buttons for the visual editor, where buttons from the third party plugins were blocked.
+* Upgrading instructions: Just re-upload the following file: lib/shortcodes/shortcodes.php
+
+2013-03-11 - Version 3.0
+This is a major update that adds new features to the theme. Updating instructions are below.
+* Added responsive design support
+* Added Shortcodes
+* Added support for WooCommerce Shopping Cart (http://wordpress.org/extend/plugins/woocommerce/)
+* Added support for new page templates: Sitemaap Page Template, Contact Form Page Template, Archives Page Template and Full Width Page Template
+* Added an option to display the featured posts in front page, when a static page is set as front page (homepage) from the wp-admin / Settings / Reading page
+* Removed the Twitter widget. Twitter stopped support for the API version 1.0 and this widget is unusable now.
+* Upgrading instructions
+    1. Upload the 'lib/shortcodes' folder from the new version to your current theme's 'lib/shortcodes' folder
+    2. Upload the 'lib/menu-primary.php' file from the new version to your current theme's 'lib' folder (Overwrite if already exists)
+    3. Upload the 'lib/menu-secondary.php' file from the new version to your current theme's 'lib' folder (Overwrite if already exists)
+    4. Upload the 'lib/js/jquery.mobilemenu.js' file from the new version to your current theme's 'lib/js' folder
+    5. Upload the 'lib/Themater.php' file from the new version to your current theme's 'lib' folder (Overwrite if already exists)
+    6. Upload the 'lib/default-admin-options.php' file from the new version to your current theme's 'lib' folder (Overwrite if already exists)
+    7. Upload the 'includes/featuredposts/featuredposts.php' file from the new version to your current theme's 'includes/featuredposts' folder (Overwrite if already exists)
+    8. Upload the following page template files 'page-template-archives.php', 'page-template-contact.php', 'page-template-sitemap.php' and 'page-template-full.php' from the new version to your current theme's folder (Overwrite if already exists)
+    9. Upload the 'woocommerce.php' file from the new version to your current theme's folder (Overwrite if already exists)
+    10. Delete the 'lib/widgets/tweets.php' file from your current theme's folder. Twitter stopped support for the API version 1.0 and this widget is unusable now. Check out our support forum for an alternative solution for displaying tweets in your website.
+    11. Open header.php and after </title> add the below code in a new line:
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    12. Open the style.css file from the new theme, find and copy all the codes (until end of the file) after /* =RESPONSIVE block and paste them at the end of your current themes's style.css
+
+2012-06-15 - Version 2.1
+* Fixed the featured posts slider not working after the WordPress 3.4 update. You can check out our support forum for a quick fix
+
+2011-10-22 - Version 2.0 
+* Minor bug fixes and added changelog.txt and readme.txt
+
+2011-04-29 - Version 1.0
+* Initial theme release!

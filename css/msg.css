@@ -1,0 +1,50 @@
+#succMessage {	
+	padding:1px;
+	margin:auto;
+	border: 1px solid #2BC8D0;
+}
+.succBackGround {
+	padding:3px 5px 3px 5px;
+	height:18px;
+	text-align:left;
+	background-color:#e8f5fd;
+	font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif;	
+	color:#008040;
+	font-size:12px;
+	font-weight:bold;
+
+}
+.succBackGround .fr
+{
+	float:right;
+}
+#errorMessage {
+	/*width:400px;*/
+	padding:1px ;
+	margin:auto;
+	border: 1px solid #7bc142;
+}
+.errorBackGround {
+	padding:3px 5px 3px 5px;
+	height:18px;
+	text-align:left;
+	background-color: #7bc142;
+	font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif;	
+	color:#FFF;
+	font-size:12px;
+	font-weight:bold;
+}
+.disMsg {
+	padding:3px 3px 3px 0px;
+}
+#msgPart {
+	padding:0px;
+	margin: 5px 153px 10px 234px;
+	
+}
+.popupval {
+    color: #red;
+    float: left;
+    text-align: left;
+    width: 60%;
+}

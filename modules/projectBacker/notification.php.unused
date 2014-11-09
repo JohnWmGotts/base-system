@@ -1,0 +1,87 @@
+<?php session_start();
+/***********************************************************
+DoDirectPaymentReceipt.php
+
+Submits a credit card transaction to PayPal using a
+DoDirectPayment request.
+
+The code collects transaction parameters from the form
+displayed by DoDirectPayment.php then constructs and sends
+the DoDirectPayment request string to the PayPal server.
+The paymentType variable becomes the PAYMENTACTION parameter
+of the request string.
+
+After the PayPal server returns the response, the code
+displays the API request and response in the browser.
+If the response from PayPal was a success, it displays the
+response parameters. If the response was an error, it
+displays the errors.
+
+Called by DoDirectPayment.php.
+
+Calls CallerService.php and APIError.php.
+
+***********************************************************/
+$checkOutId = $_POST['checkout_id'];
+$rewardId = $_REQUEST['rewardId'];
+$projectId = $_REQUEST['projectId'];
+$sparkoUserId = $_REQUEST['userId'];
+if($checkOutId!='' && is_numeric($checkOutId))
+{
+require "../../includes/config.php";
+require 'wepay.php';
+/*foreach($_REQUEST as $key=>$val)
+{
+	$con->insert("INSERT INTO admin(username,password) values('".$key."','".$val."')");
+}*/
+$client_id = "169288";
+$client_secret = "dc82477c2c";
+$access_token = "0ca67498adb22bc3414b2583267fe38e1ad2204a33da3d9e4388afb2d7572c01";
+$account_id = "1771720781";
+    // change to useProduction for live environments
+    Wepay::useProduction($client_id, $client_secret);
+    $wepay = new WePay($access_token);	
+    // create the checkout
+    $checkout = $wepay->request('/checkout/', array(
+			'checkout_id' =>$checkOutId,			// ID of the account that you want the money to go to			 // dollar amount you want to charge the user // put iframe here if you want the checkout to be in an iframe, regular if you want the user to be sent to WePay
+		)
+	);
+$currencyCode="USD";
+$amount = $checkout->amount;
+$now = time();
+$findIn =$con->recordselect("SELECT * from paypaltransaction where transactionId=".$checkOutId);
+if(mysql_num_rows($findIn)<=0)
+{
+		$inserTransaction = $con->insert("INSERT INTO paypaltransaction(correlationId,amount,transactionId,userId,dateTime,rewardId,projectId)
+						VALUES ('".$checkout->account_id."', '".$checkout->amount."', '".$checkOutId."', '".$sparkoUserId."',".$now.", ".$rewardId.", ".$projectId.")");
+		$transactionId = mysql_insert_id();
+		$projectBacking = $con->insert("INSERT INTO projectbacking (rewardId, projectId, userId, pledgeAmount, backingTime, paypalId)
+					VALUES('".$rewardId."','".$projectId."', ".$sparkoUserId.", '".$amount."', ".time().",".$checkOutId.");
+");
+//echo "SELECT * FROM projects as pro, users as usr, projectbasics as pb where pro.projectId=".$projectId." and pro.userId=usr.userId AND pb.projectId =".$projectId;exit;
+$updateProjectGoal = $con->update("UPDATE projectbasics set rewardedAmount = rewardedAmount +".$amount." where projectId =".$projectId. " LIMIT 1");
+		$projectCreater = mysql_fetch_array($con->recordselect("SELECT * FROM projects as pro, users as usr, projectbasics as pb where pro.projectId=".$projectId." and pro.userId=usr.userId AND pb.projectId =".$projectId));
+		if($projectCreater['pledgeMail']==1)
+		{
+			$projectCreaterName = mysql_fetch_array($con->recordselect("SELECT name FROM users WHERE userId =".$sparkoUserId));
+			$artical1="";
+			$artical1="<html><head><style>.body{font-family:Arial, Helvetica, sans-serif; font-size:12px; }</style></head>";
+			$artical1.="<body><strong>Hello ".$projectCreater['name'].", </strong><br />";
+			$artical1.="<br />";			
+			$artical1.= $projectCreaterName['name']." has pledged on your project <b>".$projectCreater['projectTitle']."</b><br />";
+			$artical1.= "Amount: $".$amount."<br />"; 
+			$artical1.= "Please visit pledged project by clicking on following link.<br />
+			<a href='".$base_url."browseproject/".$projectId."/".Slug($projectCreater['projectTitle']).'/'."' target='_blank'>Click Here</a><br />";
+			$artical1.="<br /><br />Kind Regards,<br />".DISPLAYSITENAME." Team</body></html>";
+			$subject1="Pledge on ".unsanitize_string(ucfirst($projectCreater['projectTitle']));
+			$mailbody1=$artical1;
+			$headers1 = "MIME-Version: 1.0\r\n";
+			$headers1 .= "Content-type: text/html\r\n";
+			$headers1 .= FROMEMAILADDRESS;
+			@mail(base64_decode($projectCreater['emailAddress']), $subject1, $mailbody1, $headers1);
+		}
+}
+    // display the response	
+die();	
+}
+?>

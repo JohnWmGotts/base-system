@@ -1,0 +1,17 @@
+<?php
+	require_once("../../includes/config.php");
+	$left_panel = false;
+	$cont_mid_cl='-75';	
+	$title = "Staff Picks";
+	$meta = array("description"=>"Staff Picks","keywords"=>"staff picks");
+	
+    /*if($_SESSION["userId"]=="" and $_SESSION["name"]=="")
+	{
+        header('Location: ../../index.php');
+  	}*/
+	
+	$module = 'browse';
+	$page = 'staffpicks';
+	$content = $module.'/'.$page;
+	require_once(DIR_TMP."main_page.tpl.php");
+?>

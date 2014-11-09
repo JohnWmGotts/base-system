@@ -1,0 +1,45 @@
+.fl{float:left;}
+.fr{float:right;}
+.clear{clear:both;}
+
+.main{margin:0px; padding:0px; width:900px; height:auto; font-family:helvetica, "Helvetica Neue", arial, sans-serif;border-top-left-radius: 7px; border-top-right-radius: 7px;border: #CCC solid 1px; margin:auto; margin-bottom:55px;}
+.main-title{background:#96dd5c; height:35px; line-height:35px; font-size:20px; font-weight:bold; margin:0px; padding:0px 10px;border-top-left-radius: 7px; border-top-right-radius: 7px;}
+.left-panel{margin:0px 0px 0px 10px; padding:0px; width:auto; height:auto;}
+.right-panel{margin:0px 25px 0px 0px; padding:0px; width:auto; height:auto;}
+.even{color:#0096bb;}
+.common{margin:0px auto; padding:0px 10px; width:auto; height:35px; line-height:35px; /*border-bottom:#CCCCCC solid 1px;*/ font-size:12px;}
+
+.date{margin:0px; padding:0px; width:281px; height:auto; font-size:16px; font-weight:bold;}
+.transaction{margin:0px; padding:0px; width:138px; height:auto; font-size:16px; font-weight:bold;}
+.description{margin:0px; padding:0px; width:131px; height:auto; font-size:16px; font-weight:bold; word-wrap:break-word;}
+.price{margin:0px; padding:0px; width:124px; height:auto; font-size:16px; font-weight:bold; word-wrap:break-word;}
+.payto{margin:0px; padding:0px; width:150px; height:auto; font-size:16px; font-weight:bold; word-wrap:break-word;}
+.amount{margin:0px; padding:0px; width:80px; height:auto; font-size:16px; font-weight:bold;}
+
+.date-in{margin:0px; padding:0px; width:281px; height:auto;}
+.transaction-in{margin:0px; padding:0px; width:138px; height:auto;}
+.description-in{margin:0px; padding:0px; width:131px; height:auto; word-wrap:break-word;}
+.price-in{margin:0px; padding:0px; width:161px; height:auto; word-wrap:break-word;}
+.payto-in{margin:0px; padding:0px; width:150px; height:auto; word-wrap:break-word;}
+.amount-in{margin:0px; padding:0px; width:80px; height:auto;}
+/*.heading{margin-left:10px;}*/
+.left-margin{margin-left:10px;}
+
+
+.grey-bg{background-color:#65ac2c;}
+
+.table-main{width:960px; margin:auto; border:7px solid #999; border-radius:10px; padding:15px;}
+.table{height:200px; overflow-y: scroll; display:block;}
+tr:nth-child(odd){background-color:#f6f5f5;}
+.table1{width:955px; border:1px solid #666; border-radius:5px;}
+.table-title{background-color:#093; width:100%; color:#FFF; line-height:40px; font-size:20px; font-weight:bold;}
+.table-title1{padding:0px 15px; width:70%;}
+.table-title2{color:#0096bb; font-weight:bold; font-size:16px; line-height:30px;}
+.table-title3{color:#0096bb; background-color:#FFF; font-weight:bold; font-size:16px; line-height:30px;}
+
+
+
+.odd
+{
+background:#ccc;
+}

@@ -1,0 +1,53 @@
+In templates/content/browse/browseproject.tpl.php when user clicks Green button to back project
+		-> /projectBacker/<projectId>/<projectTitle>/ -> modules/projectBacker/index.php
+			-> displays templates/content/projectBacker/index.tpl.php
+			User specifies backing amount and chooses reward/none and clicks to continue
+			-> back to modules/projectBacker/index.php
+				-> displays templates/content/projectBacker/paypalInfo.tpl.php to confirm backing request
+				User optionally edits backing amount and clicks to continue backing request
+				-> back to modules/projectBacker/index.php
+					-> index.php calls doPreapproval($_POST) fct in payment.class.php
+						-> backerPreapprovePayment sets up call to adaptive.class Preapproval including
+						   a trackerId on the query strings of ReturnURL and CancelURL
+						-> backerPreapprovePayment calls paypal->Preapproval api and handles curl response
+						   If success insert a paypalbacking record with payment_status='?' and including preapproval key
+						   then redirect to the URL returned by api for customer actual approval.
+						   [New sdk api did not return a redirect... did it all while customer at ppal and ack success
+						    so changed code to test and if no redirecturl returned, then use prepared returnUrl or cancelUrl]
+						   If not success return to project page and indicate error status.
+						-> Api (or our code) returns to returnUrl (thankyou.php) after customer agreement to preapprove
+						   thankyou.php marks paypalbacking record payment_status='p' (preapproved) and
+						   updates projectbasics with increased amount and # of backers (if this backer is new)
+						   sends email advice to project creator if requested advising of new backing and backer
+						   returns to project page with a thankyou notice to the customer.
+						-> Api returns to cancelUrl (precancel.php) after customer refuses preapproval
+						   precancel.php deletes the paypalbacking record for that projectId,trackingId, and '?' status
+						   returns to project page with 
+						   
+In automatic_cron.php (run daily) 
+	-> check_project_status
+		if successful
+		-> pay_to_creator_on_success in functions.php
+			for each backing record
+				-> call payExecute_Successful in payment.class.php
+					-> $PayPal->ExecutePayment
+						on success:
+						-> payExecute_Successful_backer_dbupdate - mark paypalbacking executed
+						-> payExecute_Successful_backer_mail - inform backer of pledge given to owner
+						on failure:
+						-> cancel_preapprovals_backer_dbupdate - mark paypalbacking cancelled...
+						-> payExecute_Successful_failed_backer_mail - inform backer of failure
+			-> call pay_Execute_Successful_creator_mail - inform owner of success
+			
+		if unsuccessful, set funding_status = 'n' projectbasics and
+		-> cancel_preapprovals (new) function in functions.php
+			for each backing record
+				-> call cancel_preapprovals (new) in payment.class.php
+					-> $PayPal->CancelPreapproval
+						on success:
+						-> cancel_preapprovals_backer_dbupdate - mark paypalbacking cancelled
+						-> cancel_preapprovals_backer_mail - inform backer that project failed to reach goal
+						on failure:
+						log fact that could not cancel a preapproval
+						-> cancel_preapprovals_backer_dbupdate - mark paypalbacking cancelled
+			-> cancel_preapprovals_creator_mail - inform owner of failure

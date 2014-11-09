@@ -1,0 +1,411 @@
+Options -Indexes -Multiviews 
+
+DirectoryIndex index.html index.php 
+
+<IfModule mod_deflate.c>
+#The following line is enough for .js and .css
+AddOutputFilter DEFLATE js css
+AddOutputFilterByType DEFLATE text/plain text/xml application/xhtml+xml text/css application/xml application/rss+xml application/atom_xml application/x-javascript application/x-httpd-php application/x-httpd-fastphp text/html
+ 
+#The following lines are to avoid bugs with some browsers
+BrowserMatch ^Mozilla/4 gzip-only-text/html
+BrowserMatch ^Mozilla/4\.0[678] no-gzip
+BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+</IfModule>
+
+# BEGIN EXPIRES
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresDefault "access plus 10 days"
+ExpiresByType text/css "access plus 1 week"
+ExpiresByType text/plain "access plus 1 month"
+ExpiresByType image/gif "access plus 1 month"
+ExpiresByType image/png "access plus 1 month"
+ExpiresByType image/jpeg "access plus 1 month"
+ExpiresByType application/x-javascript "access plus 1 month"
+ExpiresByType application/javascript "access plus 1 week"
+ExpiresByType application/x-icon "access plus 1 year"
+</IfModule>
+# END EXPIRES
+
+<IfModule mod_headers.c>
+<FilesMatch "\.(js|css|xml|gz)$">
+Header append Vary Accept-Encoding
+</FilesMatch>
+<FilesMatch "\.(ico|jpe?g|png|gif|swf)$">
+Header set Cache-Control "public"
+</FilesMatch>
+<FilesMatch "\.(css)$">
+Header set Cache-Control "public"
+</FilesMatch>
+<FilesMatch "\.(js)$">
+Header set Cache-Control "private"
+</FilesMatch>
+<FilesMatch "\.(x?html?|php)$">
+Header set Cache-Control "private, must-revalidate"
+</FilesMatch>
+</IfModule>
+
+
+RewriteEngine On
+
+#RewriteCond %{HTTP_HOST}   !^www\.crowdedrocket\.com [NC]
+#RewriteCond %{HTTP_HOST}   !^$
+#RewriteRule ^/(.*)         http://www.crowdedrocket.com/$1 [L,R]
+
+# temp rewrite - prelaunch...
+RewriteRule ^city/1/crowdedrocket-com$ index.html [QSA,L]
+RewriteRule ^city/1/crowdedrocket-com/$ index.html [QSA,L]
+
+<IfModule mod_expires.c>
+	ExpiresByType image/jpeg A2592000
+	ExpiresByType image/gif A2592000
+	ExpiresByType image/png A2592000
+	ExpiresByType image/x-icon A2592000
+	ExpiresByType text/plain A2592000	
+	ExpiresByType application/x-javascript M604800
+	ExpiresByType text/css M604800
+	ExpiresByType text/html M604800
+</IfModule>
+
+<IfModule mod_gzip.c>
+	mod_gzip_on Yes
+	mod_gzip_dechunk Yes
+	mod_gzip_keep_workfiles No
+	mod_gzip_can_negotiate Yes
+	mod_gzip_add_header_count Yes
+	mod_gzip_send_vary Yes
+	mod_gzip_command_version '/mod_gzip_status'
+	mod_gzip_min_http 1000
+	mod_gzip_minimum_file_size 300
+	mod_gzip_maximum_file_size 512000
+	mod_gzip_maximum_inmem_size 60000
+	mod_gzip_handle_methods GET POST
+	mod_gzip_temp_dir /tmp
+	mod_gzip_item_include file \.html$
+	mod_gzip_item_include file \.php$
+	mod_gzip_item_include file \.pl$
+	mod_gzip_item_include file \.rb$
+	mod_gzip_item_include file \.py$
+	mod_gzip_item_include file \.cgi$
+	mod_gzip_item_include file \.css$
+	mod_gzip_item_include file \.js$
+	mod_gzip_item_include mime ^application/javascript$
+	mod_gzip_item_include mime ^application/x-javascript$
+	mod_gzip_item_include mime ^text/.*
+	mod_gzip_item_include mime ^httpd/unix-directory$
+	mod_gzip_item_include handler ^cgi-script$
+	mod_gzip_item_include handler ^server-status$
+	mod_gzip_item_include handler ^server-info$
+	mod_gzip_item_include handler ^application/x-httpd-php
+	mod_gzip_item_exclude mime ^image/.*
+</IfModule>
+
+ErrorDocument 404 http://crowdedrocket.com/
+ErrorDocument 403 http://crowdedrocket.com/
+ErrorDocument 400 http://crowdedrocket.com/
+ErrorDocument 401 http://crowdedrocket.com/
+ErrorDocument 500 http://crowdedrocket.com/
+
+#for live site
+RewriteBase /
+
+#SliderImage RoundCorner
+#RewriteRule ^roundedCorner/(.*)$ modules/roundedCorner.php?source=$1 [QSA,L]
+#RewriteRule ^roundedCorner/(.*)/$ modules/roundedCorner.php?source=$1 [QSA,L]
+
+#templates/content/sitesDefault/error.html
+RewriteRule ^ScriptError$ templates/content/sitesDefault/error.php [QSA,L]
+RewriteRule ^ScriptError/$ templates/content/sitesDefault/error.php [QSA,L]
+
+RewriteRule ^signup$ modules/user/loginsignup.php?signup [QSA,L]
+RewriteRule ^signup/$ modules/user/loginsignup.php?signup [QSA,L]
+
+RewriteRule ^login$ modules/user/loginsignup.php [QSA,L]
+RewriteRule ^login/$ modules/user/loginsignup.php [QSA,L]
+
+RewriteRule ^referral/([0-9]+)/([0-9]+)/$ modules/user/loginsignup.php?projid=$1&refid=$2 [QSA,L]
+RewriteRule ^referral/([0-9]+)/([0-9]+)$ modules/user/loginsignup.php?projid=$1&refid=$2 [QSA,L]
+
+RewriteRule ^referral/([0-9]+)/$ modules/user/loginsignup.php?projid=0&refid=$1 [QSA,L]
+RewriteRule ^referral/([0-9]+)$ modules/user/loginsignup.php?projid=0&refid=$1 [QSA,L]
+
+RewriteRule ^logout$ modules/user/logout.php [QSA,L]
+RewriteRule ^logout/$ modules/user/logout.php [QSA,L]
+
+RewriteRule	^user_ajax/user_email/(.*)/$ modules/user/user_ajax.php?user_email=$1 [QSA,L]
+RewriteRule	^user_ajax/user_email/(.*)$ modules/user/user_ajax.php?user_email=$1 [QSA,L]
+
+RewriteRule	^fb_connect/fb_login_process$ modules/fb_connect/fb_login_process.php [QSA,L]
+RewriteRule	^fb_connect/fb_login_process/$ modules/fb_connect/fb_login_process.php [QSA,L] 
+
+RewriteRule	^fb_connect/fb_login$ modules/fb_connect/fb_login.php [QSA,L]
+RewriteRule	^fb_connect/fb_login/$ modules/fb_connect/fb_login.php [QSA,L]
+
+RewriteRule ^resetpassword/email/(.*)/actCode/(.*)/$ modules/user/resetpassword.php?email=$1&actCode=$2 [QSA,L]
+RewriteRule ^resetpassword/email/(.*)/actCode/(.*)$ modules/user/resetpassword.php?email=$1&actCode=$2 [QSA,L]
+
+#user profile
+RewriteRule ^profile$ modules/user/profile.php [QSA,L]
+RewriteRule ^profile/$ modules/user/profile.php [QSA,L]
+RewriteRule ^ajax.profile.php$ modules/user/ajax.profile.php [NC,L]
+
+
+RewriteRule ^profile/([0-9]+)/$ modules/user/profile.php?deleteid=$1 [QSA,L]
+RewriteRule ^profile/([0-9]+)$ modules/user/profile.php?deleteid=$1 [QSA,L]
+
+
+RewriteRule ^profile/([0-9]+)/page/([0-9]+)$ modules/user/profile.php?user=$1&page=$2 [QSA,L]
+RewriteRule ^profile/([0-9]+)/page/([0-9]+)/$ modules/user/profile.php?user=$1&page=$2 [QSA,L]
+
+RewriteRule ^profile/([0-9]+)/(.*)/$ modules/user/profile.php?user=$1 [QSA,L]
+RewriteRule ^profile/([0-9]+)/(.*)$ modules/user/profile.php?user=$1 [QSA,L]
+
+
+
+#delete site
+RewriteRule ^deletewebsite/(.*)/$ modules/user/deletewebsite.php?siteid=$1 [QSA,L]
+RewriteRule ^deletewebsite/(.*)$ modules/user/deletewebsite.php?siteid=$1 [NC,L]
+
+#module user
+RewriteRule ^inbox$ modules/user/inbox.php [QSA,L]
+RewriteRule ^inbox/$ modules/user/inbox.php [QSA,L]
+
+RewriteRule ^inbox/([0-9]+)$ modules/user/inbox.php?deleteid=$1 [QSA,L]
+RewriteRule ^inbox/([0-9]+)/$ modules/user/inbox.php?deleteid=$1 [QSA,L]
+
+RewriteRule ^activity$ modules/user/activity.php [QSA,L]
+RewriteRule ^activity/$ modules/user/activity.php [QSA,L]
+
+RewriteRule ^activity/page/([0-9]+)$ modules/user/activity.php?page=$1 [QSA,L]
+RewriteRule ^activity/page/([0-9]+)/$ modules/user/activity.php?page=$1 [QSA,L]
+
+#message
+
+RewriteRule ^message/([0-9]+)/([0-9]+)$ modules/user/message.php?id=$1&projectId=$2 [QSA,L]
+RewriteRule ^message/([0-9]+)/([0-9]+)/$ modules/user/message.php?id=$1&projectId=$2 [QSA,L]
+
+RewriteRule ^message/([0-9]+)/([0-9]+)/([0-9]+)$ modules/user/message.php?senderId=$1&projectId=$2&deleteid=$3 [QSA,L]
+RewriteRule ^message/([0-9]+)/([0-9]+)/([0-9]+)/$ modules/user/message.php?senderId=$1&projectId=$2&deleteid=$3 [QSA,L]
+
+
+RewriteRule ^user_activation/email/(.*)/actCode/(.*)/$ modules/user/user_activation.php?email=$1&actCode=$2 [QSA,L]
+RewriteRule ^user_activation/email/(.*)/actCode/(.*)$ modules/user/user_activation.php?email=$1&actCode=$2 [QSA,L]
+
+RewriteRule ^profile/edit$ modules/user/editprofile.php [QSA,L]
+RewriteRule ^profile/edit/$ modules/user/editprofile.php [QSA,L]
+
+#RewriteRule ^profile/edit/website$ modules/user/editprofile.php?website [QSA,L]
+#RewriteRule ^profile/edit/website/$ modules/user/editprofile.php?website [QSA,L]
+
+#remove_image
+RewriteRule ^remove_image/([0-9]+)$ modules/user/remove_image.php?imgid=$1 [QSA,L]
+RewriteRule ^remove_image/([0-9]+)/$ modules/user/remove_image.php?imgid=$1 [QSA,L]
+
+#browseproject
+RewriteRule ^staffpicks$ modules/browse/staffpicks.php [QSA,L]
+RewriteRule ^staffpicks/$ modules/browse/staffpicks.php [QSA,L]
+
+#search-term
+#RewriteRule ^search/$ modules/search/index.php [QSA,L]
+RewriteRule ^search/$ modules/search/index.php [NC,L]
+#RewriteRule ^search$ modules/search/index.php [QSA,L]
+RewriteRule ^search$ modules/search/index.php [NC,L]
+RewriteRule ^ajax.search.php$ modules/search/ajax.search.php [QSA,L]
+RewriteRule ^ajax.search.php/$ modules/search/ajax.search.php [QSA,L]
+
+RewriteRule ^search/(.*)/([0-9]+)/$ modules/search/index.php?term=$1?page=$2 [QSA,L]
+RewriteRule ^search/(.*)/([0-9]+)$ modules/search/index.php?term=$1?page=$2 [QSA,L]
+
+RewriteRule ^search/(.*)/$ modules/search/index.php?term=$1 [QSA,L]
+RewriteRule ^search/(.*)$ modules/search/index.php?term=$1 [QSA,L]
+
+
+#help/faq
+RewriteRule ^help$ modules/help/index.php [QSA,L]
+RewriteRule ^help/$ modules/help/index.php [QSA,L]
+
+#RewriteRule ^help/faqresult/([0-9]+)$ modules/help/faqresult.php?id=$1 [QSA,L]
+#RewriteRule ^help/faqresult/([0-9]+)/$ modules/help/faqresult.php?id=$1 [QSA,L]
+
+RewriteRule ^help/([0-9]+)/(.*)/$ modules/help/faqresult.php?id=$1 [QSA,L]
+RewriteRule ^help/([0-9]+)/(.*)$ modules/help/faqresult.php?id=$1 [QSA,L]
+
+RewriteRule ^help/search$ modules/help/faqsearch.php [QSA,L]
+RewriteRule ^help/search/$ modules/help/faqsearch.php [QSA,L]
+
+#RewriteRule ^help/faqsearch$ modules/help/faqsearch.php [QSA,L]
+#RewriteRule ^help/faqsearch/$ modules/help/faqsearch.php [QSA,L]
+
+#staticpage
+RewriteRule ^content/([0-9]+)/(.*)$ modules/staticPages/index.php?id=$1 [QSA,L]
+RewriteRule ^content/([0-9]+)/(.*)/$ modules/staticPages/index.php?id=$1 [QSA,L]
+
+RewriteRule ^blog$ blog/ [QSA,L]
+RewriteRule ^blog/$ blog/ [QSA,L]
+
+RewriteRule ^sitemap$ modules/sitemap/index.php [QSA,L]
+RewriteRule ^sitemap/$ modules/sitemap/index.php [QSA,L]
+
+RewriteRule ^staff$ modules/browse/staff.php [QSA,L]
+RewriteRule ^staff/$ modules/browse/staff.php [QSA,L]
+
+RewriteRule ^popular$ modules/browse/popular.php [QSA,L]
+RewriteRule ^popular/$ modules/browse/popular.php [QSA,L]
+
+RewriteRule ^recentlaunch$ modules/browse/recent_launch.php [QSA,L]
+RewriteRule ^recentlaunch/$ modules/browse/recent_launch.php [QSA,L]
+
+RewriteRule ^smallproject$ modules/browse/small_project.php [QSA,L]
+RewriteRule ^smallproject/$ modules/browse/small_project.php [QSA,L]
+
+RewriteRule ^mostfunded$ modules/browse/mostfunded.php [QSA,L]
+RewriteRule ^mostfunded/$ modules/browse/mostfunded.php [QSA,L]
+
+RewriteRule ^recentsuccess$ modules/browse/recent_success.php [QSA,L]
+RewriteRule ^recentsuccess/$ modules/browse/recent_success.php [QSA,L]
+
+RewriteRule ^comingsoon$ modules/browse/coming_soon.php [QSA,L]
+RewriteRule ^comingsoon/$ modules/browse/coming_soon.php [QSA,L]
+
+
+RewriteRule ^createproject$ modules/createProject/index.php [QSA,L]
+RewriteRule ^createproject/$ modules/createProject/index.php [QSA,L]
+
+RewriteRule ^createproject/([0-9]+)$ modules/createProject/index.php?id=$1 [QSA,L]
+RewriteRule ^createproject/([0-9]+)/$ modules/createProject/index.php?id=$1 [QSA,L]
+
+#remind
+RewriteRule ^remindme/([0-9]+)/([0-9]+)$ modules/browse/remindme.php?projectId=$1&userId=$2 [QSA,L]
+RewriteRule ^remindme/([0-9]+)/([0-9]+)/$ modules/browse/remindme.php?projectId=$1&userId=$2 [QSA,L]
+RewriteRule ^remindme/([0-9]+)/userId/([0-9]+)$ modules/browse/remindme.php?projectId=$1&userId=$2 [QSA,L]
+RewriteRule ^remindme/([0-9]+)/userId/([0-9]+)/$ modules/browse/remindme.php?projectId=$1&userId=$2 [QSA,L]
+
+RewriteRule ^browseproject$ modules/browse/browseproject.php [QSA,L]
+RewriteRule ^browseproject/$ modules/browse/browseproject.php [QSA,L]
+RewriteRule ^ajax.browseproject.php$ modules/browse/ajax.browseproject.php [NC,L]
+
+RewriteRule ^browseproject/([0-9]+)/page/([0-9]+)$ modules/browse/browseproject.php?project=$1&page=$2 [QSA,L]
+RewriteRule ^browseproject/([0-9]+)/page/([0-9]+)/$ modules/browse/browseproject.php?project=$1&page=$2 [QSA,L]
+
+RewriteRule ^browseproject/([0-9]+)/([A-Za-z]+)/([0-9]+)$ modules/browse/browseproject.php?commentid=$1&type=$2&project=$3 [QSA,L]
+RewriteRule ^browseproject/([0-9]+)/([A-Za-z]+)/([0-9]+)/$ modules/browse/browseproject.php?commentid=$1&type=$2&project=$3 [QSA,L]
+
+#RewriteRule ^browseproject/([0-9]+)/userId/([0-9]+)/sn/([A-Za-z]+)/(.*)$ modules/browse/browseproject.php?project=$1&userId=$2&sn=$3 [QSA,L]
+#RewriteRule ^browseproject/([0-9]+)/userId/([0-9]+)/sn/([A-Za-z]+)/(.*)/$ modules/browse/browseproject.php?project=$1&userId=$2&sn=$3 [QSA,L]
+
+#jwg - added next two
+RewriteRule ^browseproject/([0-9]+)$ modules/browse/browseproject.php?project=$1 [QSA,L]
+RewriteRule ^browseproject/([0-9]+)/$ modules/browse/browseproject.php?project=$1 [QSA,L]
+
+RewriteRule ^browseproject/([0-9]+)/(.*)/$ modules/browse/browseproject.php?project=$1 [QSA,L]
+RewriteRule ^browseproject/([0-9]+)/(.*)$ modules/browse/browseproject.php?project=$1 [QSA,L]
+
+RewriteRule ^projectBacker$ modules/projectBacker/index.php[QSA,L]
+RewriteRule ^projectBacker/$ modules/projectBacker/index.php [QSA,L]
+
+RewriteRule ^projectBacker/([0-9]+)$ modules/projectBacker/index.php?project=$1 [QSA,L]
+RewriteRule ^projectBacker/([0-9]+)/$ modules/projectBacker/index.php?project=$1 [QSA,L]
+
+RewriteRule ^projectBacker/([0-9]+)/([0-9]+)$ modules/projectBacker/index.php?project=$1&rewardId=$2 [QSA,L]
+RewriteRule ^projectBacker/([0-9]+)/([0-9]+)/$ modules/projectBacker/index.php?project=$1&&rewardId=$2 [QSA,L]
+
+RewriteRule ^projectBacker/([0-9]+)/([0-9]+)/(.*)/$ modules/projectBacker/index.php?project=$1&rewardId=$2 [QSA,L]
+RewriteRule ^projectBacker/([0-9]+)/([0-9]+)/(.*)$ modules/projectBacker/index.php?project=$1&&rewardId=$2 [QSA,L]
+
+RewriteRule ^projectBacker/([0-9]+)/(.*)/$ modules/projectBacker/index.php?project=$1 [QSA,L]
+RewriteRule ^projectBacker/([0-9]+)/(.*)$ modules/projectBacker/index.php?project=$1 [QSA,L]
+
+#project Contributor
+RewriteRule ^projectContributor/([0-9]+)/(.*)/$ modules/projectBacker/projectContributor.php?project=$1 [QSA,L]
+RewriteRule ^projectContributor/([0-9]+)/(.*)$ modules/projectBacker/projectContributor.php?project=$1 [QSA,L]
+
+#projectupdate
+RewriteRule ^projectupdate/([0-9]+)/$ modules/user/projectupdate.php?projectId=$1 [QSA,L]
+RewriteRule ^projectupdate/([0-9]+)$ modules/user/projectupdate.php?projectId=$1 [QSA,L]
+
+RewriteRule ^projectupdate/([0-9]+)/(.*)/(.*)/$ modules/user/projectupdate.php?projectId=$1&name=$2&type=$3 [QSA,L]
+RewriteRule ^projectupdate/([0-9]+)/(.*)/(.*)$ modules/user/projectupdate.php?projectId=$1&name=$2&type=$3 [QSA,L]
+
+
+RewriteRule ^projectupdate/([0-9]+)/(.*)/$ modules/user/projectupdate.php?projectId=$1 [QSA,L]
+RewriteRule ^projectupdate/([0-9]+)/(.*)$ modules/user/projectupdate.php?projectId=$1 [QSA,L]
+
+
+
+RewriteRule ^city/([0-9]+)/(.*)$ modules/browse/city.php?catId=$1 [QSA,L]
+RewriteRule ^city/([0-9]+)/(.*)/$ modules/browse/city.php?catId=$1 [QSA,L]
+
+RewriteRule ^recentsuccess/([0-9]+)$ modules/browse/recent_success.php?catId=$1 [QSA,L]
+RewriteRule ^recentsuccess/([0-9]+)/$ modules/browse/recent_success.php?catId=$1 [QSA,L]
+
+RewriteRule ^recentsuccess/([0-9]+)/city/([0-9]+)$ modules/browse/recent_success.php?catId=$1&city=$2 [QSA,L]
+RewriteRule ^recentsuccess/([0-9]+)/city/([0-9]+)/$ modules/browse/recent_success.php?catId=$1&city=$2 [QSA,L]
+
+RewriteRule ^mostfunded/([0-9]+)$ modules/browse/mostfunded.php?catId=$1 [QSA,L]
+RewriteRule ^mostfunded/([0-9]+)/$ modules/browse/mostfunded.php?catId=$1 [QSA,L]
+
+RewriteRule ^mostfunded/([0-9]+)/city/([0-9]+)$ modules/browse/mostfunded.php?catId=$1&city=$2 [QSA,L]
+RewriteRule ^mostfunded/([0-9]+)/city/([0-9]+)/$ modules/browse/mostfunded.php?catId=$1&city=$2 [QSA,L]
+
+RewriteRule ^popular/([0-9]+)$ modules/browse/popular.php?catId=$1 [QSA,L]
+RewriteRule ^popular/([0-9]+)/$ modules/browse/popular.php?catId=$1 [QSA,L]
+
+RewriteRule ^popular/([0-9]+)/city/([0-9]+)$ modules/browse/popular.php?catId=$1&city=$2 [QSA,L]
+RewriteRule ^popular/([0-9]+)/city/([0-9]+)/$ modules/browse/popular.php?catId=$1&city=$2 [QSA,L]
+
+RewriteRule ^staff/([0-9]+)$ modules/browse/staff.php?catId=$1 [QSA,L]
+RewriteRule ^staff/([0-9]+)/$ modules/browse/staff.php?catId=$1 [QSA,L]
+
+RewriteRule ^staff/([0-9]+)/city/([0-9]+)$ modules/browse/staff.php?catId=$1&city=$2 [QSA,L]
+RewriteRule ^staff/([0-9]+)/city/([0-9]+)/$ modules/browse/staff.php?catId=$1&city=$2 [QSA,L]
+
+RewriteRule ^category/([0-9]+)/(.*)/$ modules/browse/category.php?catId=$1 [QSA,L]
+RewriteRule ^category/([0-9]+)/(.*)$ modules/browse/category.php?catId=$1 [QSA,L]
+
+#bacingHistory
+RewriteRule ^backerhistory$ modules/user/backerhistory.php [QSA,L]
+RewriteRule ^backerhistory/$ modules/user/backerhistory.php [QSA,L]
+
+#bacingHistory
+RewriteRule ^rewardhistory$ modules/user/rewardhistory.php [QSA,L]
+RewriteRule ^rewardhistory/$ modules/user/rewardhistory.php [QSA,L]
+
+
+
+#inviteFriends
+RewriteRule ^invitefriends$ modules/user/invitefriends.php [QSA,L]
+RewriteRule ^invitefriends/$ modules/user/invitefriends.php [QSA,L]
+
+#advanceFinance
+RewriteRule ^advancefinance$ modules/user/advancefinance.php [QSA,L]
+RewriteRule ^advancefinance/$ modules/user/advancefinance.php [QSA,L]
+
+RewriteRule ^backerhistory/([0-9]+)$ modules/user/backerhistory.php?page=$1 [QSA,L]
+RewriteRule ^backerhistory/([0-9]+)/$ modules/user/backerhistory.php?page=$1 [QSA,L]
+
+#paypal failed/success
+RewriteRule ^thankyou$ includes/paypal/thankyou.php [QSA,L]
+RewriteRule ^thankyou/$ includes/paypal/thankyou.php [QSA,L]
+RewriteRule ^failed$ includes/paypal/failed.php [QSA,L]
+RewriteRule ^failed/$ includes/paypal/failed.php [QSA,L]
+RewriteRule ^notify$ includes/paypal/notify.php [QSA,L]
+RewriteRule ^notify/$ includes/paypal/notify.php [QSA,L]
+
+RewriteRule ^success$ includes/paypal/thanks.php [QSA,L]
+RewriteRule ^success/$ includes/paypal/thanks.php [QSA,L]
+RewriteRule ^fail$ includes/paypal/fails.php [QSA,L]
+RewriteRule ^fail/$ includes/paypal/fails.php [QSA,L]
+
+RewriteRule ^processing$ includes/paypal/notifies.php [QSA,L]
+RewriteRule ^processing/$ includes/paypal/notifies.php [QSA,L]
+
+# api
+RewriteRule ^api/([^\/]+)/([^\/]+)/$ api.php?a=$1&b=$2 [QSA,L]
+RewriteRule ^api/([^\/]+)/([^\/]+)$ api.php?a=$1&b=$2 [QSA,L]
+
+RewriteRule ^api/([^\/]+)/([^\/]+)/([^\/]+)/$ api.php?a=$1&b=$2&c=$3 [QSA,L]
+RewriteRule ^api/([^\/]+)/([^\/]+)/([^\/]+)$ api.php?a=$1&b=$2&c=$3 [QSA,L]
+
+RewriteRule ^api/([^\/]+)/([^\/]+)/([^\/]+)/([^\/]+)/$ api.php?a=$1&b=$2&c=$3&d=$4 [QSA,L]
+RewriteRule ^api/([^\/]+)/([^\/]+)/([^\/]+)/([^\/]+)$ api.php?a=$1&b=$2&c=$3&d=$4 [QSA,L]

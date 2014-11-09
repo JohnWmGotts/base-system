@@ -1,0 +1,49 @@
+[18-Aug-2012 02:55:26] PHP Fatal error:  Call to undefined function  _deprecated_file() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/rss-functions.php on line 8
+[18-Aug-2012 02:55:26] PHP Fatal error:  Call to undefined function  feed_content_type() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/feed-atom.php on line 8
+[18-Aug-2012 02:55:27] PHP Fatal error:  Call to undefined function  add_action() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/taxonomy.php on line 113
+[18-Aug-2012 02:55:27] PHP Fatal error:  Call to undefined function  add_action() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/kses.php on line 1430
+[18-Aug-2012 02:55:27] PHP Fatal error:  Call to undefined function  add_filter() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/shortcodes.php on line 334
+[18-Aug-2012 02:55:27] PHP Fatal error:  Call to undefined function  add_action() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/theme.php on line 570
+[18-Aug-2012 02:55:27] PHP Fatal error:  Call to undefined function  add_action() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/ms-default-constants.php on line 138
+[18-Aug-2012 02:55:27] PHP Warning:  require_once(ABSPATHWPINC/class-simplepie.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/class-feed.php on line 4
+[18-Aug-2012 02:55:27] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required 'ABSPATHWPINC/class-simplepie.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/class-feed.php on line 4
+[18-Aug-2012 02:55:27] PHP Fatal error:  Class 'Walker' not found in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/category-template.php on line 766
+[18-Aug-2012 02:55:27] PHP Fatal error:  Call to undefined function  add_filter() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/user.php on line 71
+[18-Aug-2012 02:55:27] PHP Fatal error:  Call to undefined function  add_action() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/ms-functions.php on line 1826
+[18-Aug-2012 02:55:28] PHP Fatal error:  Call to undefined function  feed_content_type() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/feed-rss.php on line 8
+[18-Aug-2012 02:55:34] PHP Fatal error:  Call to undefined function  _deprecated_file() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/registration-functions.php on line 7
+[18-Aug-2012 02:55:36] PHP Fatal error:  Call to undefined function  _deprecated_file() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/class-snoopy.php on line 6
+[18-Aug-2012 02:55:39] PHP Fatal error:  Class 'Walker' not found in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/comment-template.php on line 1220
+[18-Aug-2012 02:55:44] PHP Fatal error:  Call to undefined function  feed_content_type() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/feed-rdf.php on line 8
+[18-Aug-2012 02:55:46] PHP Fatal error:  Call to undefined function  add_shortcode() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/media.php on line 715
+[18-Aug-2012 02:55:48] PHP Fatal error:  Call to undefined function  add_filter() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/default-filters.php on line 17
+[18-Aug-2012 02:55:51] PHP Fatal error:  Call to undefined function  is_robots() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/template-loader.php on line 10
+[18-Aug-2012 02:55:53] PHP Fatal error:  Call to undefined function  add_action() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/post.php on line 159
+[18-Aug-2012 02:55:56] PHP Fatal error:  Call to undefined function  feed_content_type() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/feed-atom-comments.php on line 8
+[18-Aug-2012 02:55:56] PHP Fatal error:  Call to undefined function  add_action() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/author-template.php on line 394
+[18-Aug-2012 02:55:58] PHP Fatal error:  Call to undefined function  feed_content_type() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/feed-rss2.php on line 8
+[18-Aug-2012 02:56:00] PHP Fatal error:  Call to undefined function  add_action() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/general-template.php on line 1283
+[18-Aug-2012 02:56:11] PHP Fatal error:  Class 'Walker' not found in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/nav-menu-template.php on line 17
+[18-Aug-2012 02:56:14] PHP Fatal error:  Call to undefined function  add_action() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/canonical.php on line 504
+[18-Aug-2012 02:56:17] PHP Fatal error:  Call to undefined function  is_admin() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/vars.php on line 20
+[18-Aug-2012 02:56:18] PHP Fatal error:  Call to undefined function  _deprecated_file() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/rss.php on line 18
+[18-Aug-2012 02:56:20] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php) [<a href='function.require'>function.require</a>]: failed to open stream: No such file or directory in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/script-loader.php on line 25
+[18-Aug-2012 02:56:20] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php) [<a href='function.require'>function.require</a>]: failed to open stream: No such file or directory in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/script-loader.php on line 25
+[18-Aug-2012 02:56:20] PHP Fatal error:  require() [<a href='function.require'>function.require</a>]: Failed opening required 'ABSPATHWPINC/class.wp-dependencies.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/script-loader.php on line 25
+[18-Aug-2012 02:56:21] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/class.wp-styles.php on line 19
+[18-Aug-2012 02:56:26] PHP Warning:  require(ABSPATHWPINC/option.php) [<a href='function.require'>function.require</a>]: failed to open stream: No such file or directory in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/functions.php on line 8
+[18-Aug-2012 02:56:26] PHP Warning:  require(ABSPATHWPINC/option.php) [<a href='function.require'>function.require</a>]: failed to open stream: No such file or directory in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/functions.php on line 8
+[18-Aug-2012 02:56:26] PHP Fatal error:  require() [<a href='function.require'>function.require</a>]: Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/functions.php on line 8
+[18-Aug-2012 02:56:28] PHP Fatal error:  Class 'WP_Widget' not found in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/default-widgets.php on line 14
+[18-Aug-2012 02:56:29] PHP Fatal error:  Class 'Walker' not found in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/post-template.php on line 975
+[18-Aug-2012 02:56:34] PHP Fatal error:  Call to undefined function  is_main_site() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/update.php on line 433
+[18-Aug-2012 02:56:39] PHP Fatal error:  Class 'WP_Dependencies' not found in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/class.wp-scripts.php on line 19
+[18-Aug-2012 02:56:40] PHP Fatal error:  Class 'IXR_Server' not found in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/class-wp-xmlrpc-server.php on line 22
+[18-Aug-2012 02:56:47] PHP Warning:  require(ABSPATHWPINC/ms-load.php) [<a href='function.require'>function.require</a>]: failed to open stream: No such file or directory in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/ms-settings.php on line 14
+[18-Aug-2012 02:56:47] PHP Warning:  require(ABSPATHWPINC/ms-load.php) [<a href='function.require'>function.require</a>]: failed to open stream: No such file or directory in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/ms-settings.php on line 14
+[18-Aug-2012 02:56:47] PHP Fatal error:  require() [<a href='function.require'>function.require</a>]: Failed opening required 'ABSPATHWPINC/ms-load.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/ms-settings.php on line 14
+[18-Aug-2012 02:56:48] PHP Fatal error:  Call to undefined function  add_action() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/admin-bar.php on line 39
+[18-Aug-2012 02:56:51] PHP Fatal error:  Call to undefined function  add_filter() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/ms-default-filters.php on line 17
+[18-Aug-2012 02:56:52] PHP Fatal error:  Class 'IXR_Client' not found in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/class-wp-http-ixr-client.php on line 9
+[18-Aug-2012 02:56:53] PHP Fatal error:  Call to undefined function  _deprecated_file() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/registration.php on line 7
+[18-Aug-2012 02:56:54] PHP Fatal error:  Call to undefined function  feed_content_type() in /home/ncrypted/public_html/clients/sparkovator/blog/wp-includes/feed-rss2-comments.php on line 8

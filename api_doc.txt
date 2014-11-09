@@ -1,0 +1,42 @@
+// start / resume session
+call format: http://crowdedrocket.com/api/cksession/<b64_user_email>
+example: http://crowdedrocket.com/api/cksession/am9obndtQHhtaXNzaW9uLmNvbQ==
+response: {"session":"YES","token":"feb25dc7aaffc5abc238fcdef23a911f2e82d3edab2c2fde64606a6bd742bc91889a5f1d78ef2a6969349b8cf03b3164ef8d827393220a94fe28d8b8a06d6113"}
+
+// login
+call format: http://crowdedrocket.com/api/login/<session_token>/<b64_user_email>/<b64_user_pwd>
+example: http://crowdedrocket.com/api/login/feb25dc7aaffc5abc238fcdef23a911f2e82d3edab2c2fde64606a6bd742bc91889a5f1d78ef2a6969349b8cf03b3164ef8d827393220a94fe28d8b8a06d6113/am9obndtQHhtaXNzaW9uLmNvbQ==/SnVzdGluMQ==
+response: {"completion":"OK"}
+
+// logout
+call format: http://crowdedrocket.com/api/logout/<session_token>
+example: http://crowdedrocket.com/api/logout/feb25dc7aaffc5abc238fcdef23a911f2e82d3edab2c2fde64606a6bd742bc91889a5f1d78ef2a6969349b8cf03b3164ef8d827393220a94fe28d8b8a06d6113
+response: {"completion":"OK"}
+
+// obtain list of current active projects
+call format: http://crowdedrocket.com/api/projects/<session_token>
+example: http://crowdedrocket.com/api/projects/feb25dc7aaffc5abc238fcdef23a911f2e82d3edab2c2fde64606a6bd742bc91889a5f1d78ef2a6969349b8cf03b3164ef8d827393220a94fe28d8b8a06d6113/
+response: {"completion":"OK","content":[{"projectId":"1","userId":"1","projectTitle":"Test project","projectCategory":"16","projectLocation":"CrowdedRocket.com","projectStart":"1410316513","projectEnd":"1412908513","fundingGoal":"10","rewardedAmount":null,"fundingStatus":"r","shortBlurb":"Test project to understand project creation and change requirements for CR""}]}
+
+// obtain basic information about the logged-in user
+call format: http://crowdedrocket.com/api/userinfo/<session_token>
+example: http://crowdedrocket.com/api/userinfo/feb25dc7aaffc5abc238fcdef23a911f2e82d3edab2c2fde64606a6bd742bc91889a5f1d78ef2a6969349b8cf03b3164ef8d827393220a94fe28d8b8a06d6113
+response: {"completion":"OK","content":{"name":"John Wm Gotts","timezone":"4","biography":"GM\/EDS data center technical and management roles, director of data center automation and sr staff consultant at AmEx in Phoenix, smart card financial system development at Amdahl and small startup, anti-spam and anti-malware product development, and web site development.",
+	"profilePicture":"images\/site\/projectImages\/photos\/94230454_34252585_58255538.jpg","profilePicture100_100":"images\/site\/projectImages\/photos\/49580053_24817877_27129832.jpg","profilePicture40_40":"images\/site\/projectImages\/photos\/39361562_89466393_30171384.jpg","profilePicture80_80":"images\/site\/projectImages\/photos\/47871149_64039757_55992767.jpg","profilePicture80_60":"images\/site\/projectImages\/photos\/80610742_95216123_50800725.jpg",
+	"userLocation":"Lewison, Idaho"}}
+
+// obtain extended information about the project owner
+call format: http://crowdedrocket.com/api/userinfo/<session_token>/<projectId>
+example: http://crowdedrocket.com/api/userinfo/feb25dc7aaffc5abc238fcdef23a911f2e82d3edab2c2fde64606a6bd742bc91889a5f1d78ef2a6969349b8cf03b3164ef8d827393220a94fe28d8b8a06d6113/1
+response: {"completion":"OK","content":{"name":"John Wm Gotts","timezone":"4","biography":"GM\/EDS data center technical and management roles, director of data center automation and sr staff consultant at AmEx in Phoenix, smart card financial system development at Amdahl and small startup, anti-spam and anti-malware product development, and web site development.",
+	"profilePicture":"images\/site\/projectImages\/photos\/94230454_34252585_58255538.jpg","profilePicture100_100":"images\/site\/projectImages\/photos\/49580053_24817877_27129832.jpg","profilePicture40_40":"images\/site\/projectImages\/photos\/39361562_89466393_30171384.jpg","profilePicture80_80":"images\/site\/projectImages\/photos\/47871149_64039757_55992767.jpg","profilePicture80_60":"images\/site\/projectImages\/photos\/80610742_95216123_50800725.jpg",
+	"userLocation":"Lewison, Idaho","newsletter":"1","lanuchProjectNotify":"1","newFollower":"1","updatesNotifyBackedProject":"1","createdProjectComment":"1","pledgeMail":"1"}}
+
+// Pledge to back the project if it reaches its funding goal within the allowed timeframe. 
+// projectId is the id of the project to which $$ are being pledged.
+// nnn... is whole dollar amount in U.S. dollars.
+call format: http://crowdedrocket.com/api/pledge/<session_token>/<projectId>/<b64encodedUserPwd>/<nnnnn> 
+example: http://crowdedrocket.com/api/pledge/feb25dc7aaffc5abc238fcdef23a911f2e82d3edab2c2fde64606a6bd742bc91889a5f1d78ef2a6969349b8cf03b3164ef8d827393220a94fe28d8b8a06d6113/1/25
+response: {"completion":"OK","content":[{"projectId":"1","receipt":"Thankyou for your pledge of $nnn. We have sent you an email to explain how pledges are held and processed."}]}
+
+All requests return {"completion":"NOK", "error":"... error message"} when errors are encountered.

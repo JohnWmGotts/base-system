@@ -1,0 +1,127 @@
+<?php
+include("../includes/config.php");
+
+wrtlog("WARNING: IN modules/user/fb_login.php"); // DEBUG
+
+if($page=='loginsignup')
+{
+	wrtlog("before call to checkLogin"); // DEBUG
+	if(!checkLogin(false))
+	{
+		wrtlog("after call to checkLogin"); // DEBUG
+		if(isset($_SESSION['User']) && $_SESSION['User']["name"] != '')
+		{
+			$fbArray = $_SESSION['User'];
+			$userid=getValFromTbl('id','user',"email='".$fbArray['email']."'");
+			$insert = true;
+			if($userid > 0)
+			{
+				$insert=false;
+			}
+			else  {// if new user, insert user details in your mysql table
+				if($insert){
+					$pass=genrateRandom(8,'alphanum');
+					if($gender=="female")
+					{
+						$sex="0";
+					}
+					else
+					{
+						$sex="1";
+					}
+					$insert="INSERT INTO registration (password,firstname,lastname,email,gender,country,zipcode,city,phone,status,created,ip_add,terms_condition,picture,fb_connect) VALUES ('".md5($pass)."','".addslashes($fname)."','".addslashes($lname)."','".addslashes($email)."','".addslashes($sex)."','".addslashes($country)."','".addslashes($zipcode)."','".addslashes($city)."','".addslashes($phone)."','0',CURRENT_TIMESTAMP,'".get_ip_address()."','0','".addslashes($photo)."','1')";
+					//echo $insert;
+					//echo "<br/>";
+					//print_r($_SESSION);
+					//die();
+					$con->insert($insert);
+					$userid=mysql_insert_id();
+					$_SESSION['userId']=$userid;
+					//$logtext=addslashes($fname).' '.addslashes($lname).' user FB registration,FB Login,';
+					$karr=array('%UNAME%','%PSW%','%EMAIL%','%URL%','%LINKNM%');
+					$varr=array($uname,$pass,$email,SITE_URL,SITE_NM);
+					//sendMail($email,FROM_NM,FROM_EMAIL,'Welcome to Clubplanet Clone',"",$karr,$varr);
+					/*print_r($_REQUEST);
+					exit;*/
+				} 
+				else {
+					
+					$logtext='FB Login,';
+					$_SESSION['userId']=$userid;
+				}
+			}
+		
+			if($_SESSION['User']['id']!='') {
+				$th1 = 'http://graph.facebook.com/'.$_SESSION['User']['id'].'/picture?width=650&height=650';
+				$profileImagePath = $th1;
+				$ext = getExt($profileImagePath);
+				$filenm = md5(date("Y-m-d H:i:s")+rand()).'.'.$ext;
+				$uploadPath = DIR_TEMP.$filenm;
+				
+				$th_arr[0]=array('width'=>'209','height'=>'209');
+				$th_arr[1]=array('width'=>'320','height'=>'225');
+				$th_arr[2]=array('width'=>'68','height'=>'68');
+				$th_arr[3]=array('width'=>'80','height'=>'80');
+				$th_arr[4]=array('width'=>'180','height'=>'140');
+				$th_arr[5]=array('width'=>'40','height'=>'40');
+				$th_arr[6]=array('width'=>'129','height'=>'85');
+				$th_arr[7]=array('width'=>'32','height'=>'32');
+				$filenam=imageUploadNew('user',$userid,'profile',$th_arr,'0','i','','',true,$profileImagePath);
+			}
+		
+			userLogin($userid,stripslashes($uname),stripslashes($fname).' '.stripslashes($lname),stripslashes($email));
+
+			redirectPage(SITE_URL);
+			exit;
+			
+		}
+	}
+}
+
+else if($page=='edit_profile' || $page=='dashboard')
+{
+	$fb_status=getValFromTbl('fb_status','user',"id='".get_sessionid()."'");
+	if($fb_status == 'n')
+	{
+		if(isset($_SESSION['User']) && $_SESSION['User']["name"] != '')
+		{
+			$fbArray = $_SESSION['User'];
+			/*echo '<pre>';
+			print_r($fbArray);
+			echo '</pre>';
+			exit;*/
+			
+			$update="update user set fname='".addslashes($fbArray['first_name'])."',lname='".addslashes($fbArray['last_name'])."',bdate='".date('Y-m-d', strtotime($fbArray['birthday']))."',gender='".addslashes($fbArray['gender'])."',school='".addslashes($fbArray['education'][0]['school']['name'])."',work='".addslashes($fbArray['work'][0]['employer']['name'])."',address='".addslashes($fbArray['location']['name'])."',fb_status='y' where id=".get_sessionid();
+			$con->update($update);
+			$_SESSION["ses_fname"]=$fbArray['first_name'];
+			
+			if($_SESSION['User']['id']!='') {
+				$th1 = 'http://graph.facebook.com/'.$_SESSION['User']['id'].'/picture?width=650&height=650';
+				$profileImagePath = $th1;
+				$ext = getExt($profileImagePath);
+				$filenm = md5(date("Y-m-d H:i:s")+rand()).'.'.$ext;
+				$uploadPath = DIR_TEMP.$filenm;
+				
+				$th_arr[0]=array('width'=>'209','height'=>'209');
+				$th_arr[1]=array('width'=>'320','height'=>'225');
+				$th_arr[2]=array('width'=>'68','height'=>'68');
+				$th_arr[3]=array('width'=>'80','height'=>'80');
+				$th_arr[4]=array('width'=>'180','height'=>'140');
+				$th_arr[5]=array('width'=>'40','height'=>'40');
+				$th_arr[6]=array('width'=>'129','height'=>'85');
+				$th_arr[7]=array('width'=>'32','height'=>'32');
+				$filenam=imageUploadNew('user',get_sessionid(),'profile',$th_arr,'0','i','','',true,$profileImagePath);
+			}
+			$_SESSION['notice']='<span class="label" style="opacity: 1; ">'.M_FBIMPORT.'</span>';
+				
+			redirectPage(SITE_URL.get_language_url()."user/dashboard");
+			exit;	
+
+		}
+	}
+}
+else
+{
+	redirectPage(SITE_URL);
+}
+?>

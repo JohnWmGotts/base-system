@@ -1,0 +1,305 @@
+body
+{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	color:#333333;
+	text-decoration:none;
+	line-height:16px;
+	min-width:1000px;
+	margin:0px;
+	padding:0px;
+}
+img {
+	border:none;
+}
+.error_msg, .error{
+	color:#FF0000;
+	font-weight:normal; 
+	padding-left:3px;
+}
+.success {
+	color:#003300;
+	font-weight:bold;
+}
+/*Header css start*/
+.header
+{
+	border:solid 1px #959292;
+}
+.headerright ul
+{
+	margin:0px;
+	padding:10px 10px 0px 0px;
+	list-style:none;
+}
+.headerright ul li
+{
+	text-align:right;
+	line-height:20px;
+}
+.headerright ul li a
+{
+	color: #072338;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.headerright ul li a:hover
+{
+	color: #cc0000;    
+    text-decoration: underline;
+}
+/*Header css end*/
+/*Content css start*/
+.content
+{
+	padding-top:10px;
+}
+.content-left-bg
+{
+	background:url(../images/admin/content-left-bg.gif) repeat-y;
+	background-position:top left;
+	width:10px;
+}
+.content-right-bg
+{
+	background:url(../images/admin/content-right-bg.gif) repeat-y;
+	background-position:top right;
+	width:10px;
+}
+.content-bottom-bg
+{
+	background:url(../images/admin/content-bottom-mid-bg.gif.gif) repeat-x;
+	background-position:top center;
+}
+.content-login
+{
+	background-color:#fff;
+}
+.content-login-bg
+{
+	background:url(../images/admin/login-mid-bg.gif) repeat-x;
+	background-position:top center;
+}
+.login-heding {
+    color: #0386C3;
+    font-family: Tahoma;
+    font-size: 24px;
+    font-weight: bold;
+	line-height:30px;
+}
+.logintextbox-bg
+{
+	background:url(../images/admin/login-input-bg.gif) no-repeat;
+	background-position:top left;
+	height: 23px;
+	width: 284px;
+	border:none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: #222222;
+	padding:4px 3px 3px 3px;	
+}
+.textarea-bg
+{
+	background:url(../images/admin/textarea-bg.gif) no-repeat;
+	background-position:top left;
+	height: 105px;
+	width: 284px;
+	border:none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: #222222;
+	padding:4px 3px 3px 3px;
+resize:none;	
+}
+.froms-selectbox-bg
+{
+	background:url(../images/admin/login-input-bg.gif) no-repeat;
+	background-position:top left;
+	/*width:400px;*/
+	height:30px;
+}
+.froms-selectbox
+{
+	width:282px;
+	border:none;
+	font-family: Arial, Helvetica, sans-serif;
+	/*font-size: 17px;
+	font-weight: bold;
+	color: #666666;*/
+	margin:0px 0px 0px 5px;
+}
+.title-bg
+{
+	background:url(../images/admin/title-mid-bg.gif) repeat-x;
+	background-position:top center;
+	color: #5B5A5A;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+	line-height:25px;
+}
+.leftmenu ul
+{
+	margin:0px;
+	padding:0px;
+	list-style:none;
+	border-left:solid 1px #abb5bb;
+	border-right:solid 1px #abb5bb;	
+}
+.leftmenu ul li
+{
+	line-height:33px;	
+}
+.leftmenu ul li.lfmenu-section
+{
+	line-height:33px;
+	background:#454545;
+	border-top:solid 1px #fff;
+	border-bottom:solid 1px #c6c4c4;
+	padding-left:10px;
+	color:#fff;
+	font-weight:bold;
+}
+.leftmenu ul li a
+{
+	background:#eeeeee;
+	border-top:solid 1px #fff;
+	border-bottom:solid 1px #c6c4c4;
+	padding-left:10px;
+	display:list-item;
+	color:#0085a6;
+	text-decoration:none;
+}
+.leftmenu ul li a:hover
+{
+	background:#fff;
+	border-top:solid 1px #fff;
+	border-bottom:solid 1px #c6c4c4;
+	padding-left:10px;
+	display:list-item;
+	color:#010101;
+	text-decoration:none;
+}
+.leftmenu ul li a.lfmenu-select
+{
+	background:#fff;
+	border-top:solid 1px #fff;
+	border-bottom:solid 1px #c6c4c4;
+	padding-left:10px;
+	display:list-item;
+	color:#010101;
+	text-decoration:none;
+}
+.redcolor
+{
+	color:#ff0000;
+}
+.tabeleborder, .tabeleborder tr, .tabeleborder tr td
+{
+	border:solid 1px #c7c7c7;
+	border-collapse:collapse;
+}
+.trcolor
+{
+	background-color:#f2f2f2;
+	font-weight:bold;
+}
+.link
+{
+	text-decoration:underline;
+	color:#333333;
+}
+.link:hover
+{
+	text-decoration:none;
+}
+.icon ul
+{
+	margin:0px;
+	padding:0px 0px 0px 0px;
+	list-style:none;
+}
+.icon ul li
+{
+	float:left;
+	padding:0px 5px 0px 6px;
+}
+/*Content css end*/
+
+/* PAGGING CODE CSS START */
+.b_pager {
+	CLEAR: both;
+	PADDING-RIGHT: 0px;
+	PADDING-LEFT: 0px;
+	FLOAT: none;
+	font-family: tahoma;
+	font-size: 11px;
+}
+.b_pager SPAN {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 0px; FLOAT: left; PADDING-BOTTOM: 4px; COLOR: #999999; PADDING-TOP: 4px
+}
+.b_pager A {
+	PADDING-RIGHT: 6px; DISPLAY: block; PADDING-LEFT: 6px; FLOAT: left; PADDING-BOTTOM: 2px; LINE-HEIGHT: 16px; MARGIN-RIGHT: 4px; PADDING-TOP: 2px; TEXT-DECORATION: none
+}
+.b_pager B {
+	PADDING-RIGHT: 6px; DISPLAY: block; PADDING-LEFT: 6px; FLOAT: left; PADDING-BOTTOM: 2px; LINE-HEIGHT: 16px; MARGIN-RIGHT: 4px; PADDING-TOP: 2px; TEXT-DECORATION: none
+}
+.b_pager B {
+	BORDER-RIGHT: #000000 2px solid; BORDER-TOP: #000000 2px solid; BORDER-LEFT: #000000 2px solid; COLOR: #fff; LINE-HEIGHT: 16px; BORDER-BOTTOM: #000000 2px solid; BACKGROUND-COLOR: #333333
+}
+.b_pager A {
+	BORDER-RIGHT: #CBCBCB 2px solid; BORDER-TOP: #CBCBCB 2px solid; BORDER-LEFT: #CBCBCB 2px solid; COLOR: #006699; BORDER-BOTTOM: #CBCBCB 2px solid;background-color:#FFFFFF;
+}
+.b_pager A:hover {
+	BORDER-RIGHT: #666666 2px solid; BORDER-TOP: #666666 2px solid; BORDER-LEFT: #666666 2px solid; COLOR: #1F88C7; BORDER-BOTTOM: #666666 2px solid; BACKGROUND-COLOR: #fff
+}
+.page_tbl tr, .page_tbl tr td {
+	border:none;
+}
+/* PAGGING CODE CSS END */
+/* faq CODE CSS start */
+.ui-accordion-content h2
+{
+	background-color:#F6F6F6;
+	-moz-border-radius: 4px; -webkit-border-radius: 4px; -khtml-border-radius: 4px; border-radius: 4px;
+	padding:5px;
+	font-size:12px;
+	color:#666666;
+}
+.ui-accordion-content h2 span
+{
+	float:right;
+	text-decoration:none;
+	
+}
+.ui-accordion-header a
+{
+	display:inline !important;
+	/*padding:0 !important;*/
+}
+h3.main-category-header
+{
+	padding:5px !important;
+}
+.main-category-operation
+{
+	float:right;
+}
+.main-category-operation a
+{
+	padding:0 !important;
+}
+/* faq CODE CSS END */
+/*Footer css start*/
+.footer-bg
+{
+	background:url(../images/admin/footer-mid-bg.gif) repeat-x;
+	background-position:top center;
+	text-align:center;
+}
+/*Footer css end*/

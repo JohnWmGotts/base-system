@@ -1,0 +1,11 @@
+<?php
+require "../../includes/config.php";
+require "../../includes/paypal/payment.class.php";
+
+$Pay=new Payment();
+
+$amount = urlencode($_POST['amount']);
+$rewardId = $_POST['rewardId'];
+$projectId = $_POST['projectId'];
+
+?>

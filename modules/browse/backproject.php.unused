@@ -1,0 +1,29 @@
+<?php
+	require_once("../../includes/config.php");
+	if(isset($_SESSION['userId']) && isset($_GET['rewardId']) && isset($_GET['projectId']) && $_SESSION['userId']!='' && $_GET['userId']!='' && $_GET['rewardId']!='' && $_GET['projectId']!='')	
+	{
+		$rewardId=$_GET['rewardId'];
+		$projectId=$_GET['projectId'];
+		$userId=$_SESSION['userId'];
+		$sel_pledge=mysql_fetch_assoc($con->recordselect("SELECT * FROM projectrewards WHERE rewardId='$rewardId'"));
+		$currentTime = time();
+		
+		$newbacker = 1; // jwg
+		$backedbefore=$this->con->recordselect("SELECT * FROM projectbacking WHERE userId='$userId' and projectId='$projectId'");
+		if(mysql_num_rows($backedbefore)>0) {
+			$newbacker = 0;
+		}
+		$con->insert("INSERT INTO projectbacking (`backingId`, `rewardId`, `projectId`, `userId`, `pledgeAmount`, `backingTime`) VALUES (NULL, '$rewardId', '$projectId', '$userId', '".$sel_pledge['pledgeAmount']."', '$currentTime')");
+		$sel_amount=mysql_fetch_assoc($con->recordselect("SELECT * FROM projectbasics WHERE projectId='$projectId'"));
+		$amount=$sel_amount['rewardedAmount'] + $sel_pledge['pledgeAmount'];
+		$backers = $sel_amount['rewardedContributor'] + newbacker; // jwg
+		$con->update("UPDATE projectbasics SET rewardedAmount='$amount', rewardedContributor='$backers' WHERE projectId='$projectId'");
+		
+		$sel_projectTitle=mysql_fetch_assoc($con->recordselect("SELECT * FROM projectbasics WHERE projectId='$projectId'"));
+		redirect(SITE_URL."browseproject/".$_GET['project'].'/'.Slug($sel_projectTitle['projectTitle']).'/');
+	}
+	else
+	{
+		echo "Wrong way";
+	}
+?>

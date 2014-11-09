@@ -1,0 +1,2 @@
+[15-Oct-2013 01:23:38] PHP Warning:  require_once(DIR_FSincludes/functions/dbconn.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory in /home2/ncrypted/public_html/demo/fundraiser/includes/config.php on line 49
+[15-Oct-2013 01:23:38] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required 'DIR_FSincludes/functions/dbconn.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home2/ncrypted/public_html/demo/fundraiser/includes/config.php on line 49
